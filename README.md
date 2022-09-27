@@ -19,17 +19,23 @@ Data was sourced from the American Epilepsy Society Seizure Prediction Challenge
 5) Sigmoid Activation
 
 ## Training
-- The model was trained on random batches of 4s subsegments from 9 interictal and 9 preictal segments for 20 epochs
+- The model was trained for 20 epochs on random batches of 4s subsegments from a balanced dataset split by segments (eg. Patient 1 had 9 interictal and 9 preictal segments for training)
 - Separate models were trained for each patient/subject since each has a different number of electrodes and potentially different seizure-like brain activity
 - ADAM Optimizer
 - Binary Cross Entropy Loss
 - L2 Norm Weight Decay for Regularization
 
 ## Evaluation
-- The model was tested on all 4s subsegments from 9 interictal and 9 preictal held out segments (50% holdout validation)
+- The model was tested on all 4s subsegments from an equal number of held out segments (50% holdout validation), eg. Patient 1 had 9 interictal and 9 preictal segments for evaluation
 - Predictions for each subsegment in a segment were arithmetically averaged to obtain a segment prediction
 - Accuracy, Precision, Recall, and F1 score were calculated for both subsegment-wise and segment-wise prediction to ensure class-balanced model performance
 - Area under the Receiver Operator Characteristic curve (ROCAUC) for segment-wise prediction was used as the final model evaluation score
+
+## Performance
+- The model achieved an aggregate ROCAUC of 0.95, with an accuracy of 86%
+- Model performance on each class was equivalent with aggregate f1 scores of 0.86 for both
+![image](https://user-images.githubusercontent.com/34703136/192541933-3c79e568-49fe-4732-9585-975157afe841.png)
+
 
 ## Future Directions
 - Try Alternative Strategies for imbalanced datasets (oversampling, overweight minority class, etc.)
